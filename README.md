@@ -28,7 +28,8 @@ other method in app.route which you can change it to your preference for user le
 
 Setting up the bot: 
 =========== 
-If you haven't done this before you will require in between 20-40 minutes to set all this up. If you encounter an error , just message me on line of github.Don't worry you will get stuck but hey you gotta learn someway or another!
+If you haven't done this before you will require in between 20-40 minutes to set all this up. If you encounter an error , just message me on line or github.Don't worry you will get stuck but hey you gotta learn someway or another!  
+Line ID: @snaw.gg
 ----------
 
 Steps:
