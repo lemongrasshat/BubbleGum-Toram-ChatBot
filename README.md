@@ -3,6 +3,9 @@ BUBBLEGUM
 Toram info bot by SNAW/LEMONGRASSHAT
 ---------
 
+___
+Documentation: https://github.com/lemongrasshat/ToramBot/wiki
+___
 Features:
 ---------
 * Decent help menu (I guess)
