@@ -4,7 +4,7 @@ Toram info bot by SNAW/LEMONGRASSHAT
 ---------
 
 ___
-Documentation: https://github.com/lemongrasshat/ToramBot/wiki
+Documentation: https://github.com/lemongrasshat/ToramBot/wiki  
 Releases: https://github.com/lemongrasshat/ToramBot/releases
 ___
 Features:
