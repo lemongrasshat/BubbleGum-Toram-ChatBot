@@ -203,16 +203,6 @@ class bubblegum:
         else:
             return False
 
-    def EmptyInvalidFieldChecker(self,in_game_name,food_name,food_lvl):
-        InvalidFlag=False
-        if(self.EmptyFoodNameCheker(food_name)==True):
-            InvalidFlag=True
-        elif(self.EmptyIGNCheker(in_game_name)==True):
-            InvalidFlag=True
-        elif(self.FoodLevelChecker(food_lvl)==True):
-            InvalidFlag=True
-
-        return InvalidFlag
 
     def EmptyIGNCheker(self,in_game_name):
         if not in_game_name:
