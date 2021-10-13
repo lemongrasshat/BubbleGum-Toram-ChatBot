@@ -204,18 +204,6 @@ class bubblegum:
             return False
 
 
-    def EmptyIGNCheker(self,in_game_name):
-        if not in_game_name:
-            return True
-
-    def EmptyFoodNameCheker(self,food_name):
-        if not food_name:
-            return True
-        
-    def FoodLevelChecker(self,food_lvl):
-        if food_lvl.isdigit()==False or int(food_lvl)>10:
-            return True
-
     def SearchQueryResult(self,food_name):
         #Food search query function
         text=""
