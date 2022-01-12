@@ -56,17 +56,21 @@ APPROVED_ADMIN_ID=["ENTER YOUR ADMIN IDS HERE"] # These are admin userId
 
 app = Flask(__name__)
 app.debug=True #for debugging purposes
+app = Flask(__name__)
+app.debug=True #for debugging purposes
 
 class bubblegum:
     def __init__(self) -> None:
         self.GROUP_ID=None
         self.USER_ID=None
         self.CURRENT_ERRORS=[]
+        self.CURRENTMAXLEVEL=235
         self.foodnames=["ACCURACY","AGI","AGGRO+","AGGRO-","AMPR","ATK","CRIT","DARK_RES","DEX","DEF","DODGE","DROP_RATE","EARTH_RES","EXP_GAIN","FRAC_BARRIER",
         "FIRE_RES","HP","INT","LIGHT_RES","MAGIC_BARRIER","MAGIC_RES","MATK","MDEF","MP","PHYS_BARRIER","PHY_RESIST","STR","SA_DARK","SA_EARTH","SA_FIRE",
         "SA_LIGHT","SA_NEUTRAL","SA_WATER","SA_WIND","WATER_RES","WEAP_ATK"]
         #If you have changed values in foodnames make sure to change it in FoodValueCalculator function too
-        self.commands=["!fs","!help","!myfood","!statting","!refining","!Fs","!Help","!Myfood","!Statting","!Refining","!FS","!HELP","!MYFOOD","!STATTING"]
+        self.commands=["!fs","!help","!myfood","!statting","!refining","!Fs","!Help","!Myfood","!Statting","!Refining","!FS","!HELP","!MYFOOD","!STATTING","!mats","!MATS","!Mats"]
+        self.MaterialTerms=["mana","m","beast","b","medicine","med","cloth","c","metal","met","wood","w"]
         self.Commands1=[
         "\n□□□□□□□□□□□□□□□", 
         "\n⭕ !fs <food name>",
@@ -74,9 +78,18 @@ class bubblegum:
         "\n➡ Example: !fs int",
         "\n■■■■■■■■■■■■■■■■■■\n",
         "\n□□□□□□□□□□□□□□□",
-        "\n⭕ !lvling <lvl-number>",
-        "\n➡ Searches for boss and miniboss",
-        "\n➡ Example: !lvling 230",
+        "\n⭕ !lvlyt <lvl-number>",
+        "\n➡ Searches for mobs from popular youtubers data list",
+        "\n➡ Example: !lvlyt 230",
+        "\n■■■■■■■■■■■■■■■■■■\n",
+        "\n□□□□□□□□□□□□□□□",
+        "\n⭕ !lvl <lvl-number>",
+        "\n➡ Searches for boss and miniboss on coryn",
+        "\n➡ Example: !lvl 230",
+        "\n■■■■■■■■■■■■■■■■■■\n",
+        "\n⭕ !mats <material_name>",
+        "\n➡ 🆕 Shows Farming spots for materials: mana(m),medicine(med),cloth(c),beast(b),metal(met),wood(w)",
+        "\n➡ Example(both short and long form works!): !mats mana or !mats m",
         "\n■■■■■■■■■■■■■■■■■■\n",
         "\n□□□□□□□□□□□□□□□",
         "\n⭕ !refining",
@@ -87,6 +100,7 @@ class bubblegum:
         "\n➡ Shows statting guide and sim.",
         "\n■■■■■■■■■■■■■■■■■■\n",
         "\n□□□□□□□□□□□□□□□",
+        
         "\n⭕ !myfood",
         "\n➡ Shows Your foodbuffs",
         "\n■■■■■■■■■■■■■■■■■■\n",
@@ -207,6 +221,145 @@ class bubblegum:
         else:
             return False
 
+    
+    def LevellingQueryValidator(self,SplitSearchInquiry):
+        length=len(SplitSearchInquiry) 
+        if(length==2):
+            if(SplitSearchInquiry[0]=="!lvlyt"):
+                if(SplitSearchInquiry[1].isdigit()==True):
+                    if(int(SplitSearchInquiry[1])<=self.CURRENTMAXLEVEL and int(SplitSearchInquiry[1])>0):
+                        return True
+                    else:
+                        self.CURRENT_ERRORS.append("Enter level number between 1-"+str(self.CURRENTMAXLEVEL))
+                        return False
+                else:
+                    self.CURRENT_ERRORS.append("Number is not digit!")
+                    return False
+        elif(length>2):
+            if(SplitSearchInquiry[0]=="!lvlyt"):
+                self.CURRENT_ERRORS.append("⚠ There are some 👉extra  fields in your command! Proper query is   ▶ !lvlyt <Number> ◀\n")
+                return False
+            else:
+                self.CURRENT_ERRORS.append("ERROR_LVLVYT_NOTPROPER")
+                return False
+        else:
+            self.CURRENT_ERRORS.append("⚠ There are some 👉missing  fields in your command! Proper query is   ▶ !lvlyt <Number> ◀ \n")
+            return False
+    
+    def PopularLevellingManager(self,Searchquery):
+        #!lvlyt function 
+        SplitSearchInquiry=self.QueryCleaner(Searchquery)
+        if(self.LevellingQueryValidator(SplitSearchInquiry)==True):
+            text=self.PopularLevellingCollector(int(SplitSearchInquiry[1]))
+            return text 
+        else:
+            if "ERROR_LVLVYT_NOTPROPER" in self.CURRENT_ERRORS:
+                pass 
+            else:
+                ErrorText=""
+                for errors in self.CURRENT_ERRORS:
+                    ErrorText+=errors
+                return ErrorText
+            
+    def MaterialQueryValidator(self,SplitSearchInquiry):
+        length=len(SplitSearchInquiry)
+        if(length==2):
+            if(SplitSearchInquiry[0]=="!mats"):
+                if(SplitSearchInquiry[1] in self.MaterialTerms):
+                    return True
+                else:
+                    self.CURRENT_ERRORS.append("Please Enter Valid Material search query proper terms are :\n mana(m),medicine(med),cloth(c),beast(b),metal(met),wood(w)")
+                    return False
+        elif(length>2):
+            if(SplitSearchInquiry[0]=="!mats"):
+                self.CURRENT_ERRORS.append("⚠ There are some 👉extra  fields in your command! Proper query is   ▶ !mats <material_name> ◀\n")
+                return False
+            else:
+                self.CURRENT_ERRORS.append("ERROR_MATS_NOTPROPER")
+                return False
+        else:
+            self.CURRENT_ERRORS.append("⚠ There are some 👉missing  fields in your command! Proper query is   ▶ !mats <material_name> ◀ \n")
+            return False
+
+    def MatsDataCollector(self,MatType):
+
+        if(MatType=="m"):
+            MatType="mana"
+        elif(MatType=="med"):
+            MatType="medicine"
+        elif(MatType=="met"):
+            MatType="metal"
+        elif(MatType=="c"):
+            MatType="cloth"
+        elif(MatType=="b"):
+            MatType="beast"
+        elif(MatType=="w"):
+            MatType="wood"    
+
+        text=""
+        text+="Material Farming Spots\n"
+        text+="\n"
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        curr=conn.cursor()
+        try:
+            Query="""select * from "matfarm" where matfarm."Type" = %s  """
+            curr.execute(Query,(MatType,))
+            Result=curr.fetchall()
+            if not Result:
+                return "Error While searching_emp"
+            else:
+                for row in Result:
+                    text+="===================\n"
+                    text+="Mob: " +str(row[1])+"\n"+"Location: " +str(row[2])+"\n"+"Best Farmer: " +str(row[3])+"\n"+"Popularity: "+str(row[4])+"\n"+"Availability: "+str(row[6])
+                    text+="\n=+=+=+=+=+=+=+=+=+=+\n\n"
+                return text
+        except psycopg2.Error as e:
+            app.logger.info(e)
+            return "Error While searching"
+        finally:
+            curr.close()
+            conn.close()
+
+    def MaterialQueryManager(self,Searchquery):
+        SplitSearchInquiry=self.QueryCleaner(Searchquery)
+        if(self.MaterialQueryValidator(SplitSearchInquiry)==True):
+            text=self.MatsDataCollector(SplitSearchInquiry[1])
+            return text
+        else:
+            if "ERROR_MATS_NOTPROPER" in self.CURRENT_ERRORS:
+                pass 
+            else:
+                ErrorText=""
+                for errors in self.CURRENT_ERRORS:
+                    ErrorText+=errors
+                return ErrorText
+    
+    
+    def PopularLevellingCollector(self,level):
+        # BELOW CODE IS TO BALANCE OUT LEVEL VALUES
+        #Food search query function
+        #!lvlyt function 
+        text=""
+        text+="===================\n"
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        curr=conn.cursor()
+        try:
+            
+            Query="""select * from toram_levelling_data where %s between lvlmin and lvlmax order by lvlmax desc limit 3;"""
+            curr.execute(Query,(level,))
+            Result=curr.fetchall()
+            if not Result:
+                return "Error While searching_emp "
+            else:
+                for row in Result:
+                    text+="Level: " +str(row[0])+" - "+str(row[1])+"\n"+" Mob: " +str(row[2])+"\n"+" Location: " +str(row[3])+"\n"+" Description: " +str(row[4])
+                    text+="\n------------------\n"
+                return text
+        except psycopg2.Error as e:
+            return "Error While searching"
+        finally:
+            curr.close()
+            conn.close()
 
     def SearchQueryResult(self,food_name):
         #Food search query function
@@ -277,7 +430,7 @@ class bubblegum:
         else:
             text="⚠ There are some 👉missing  fields in your command! Proper query is   ▶ !fs <foodname> ◀ or ▶ !fs all ◀\n"
             return text
-    
+
     def GetCurrentFuid(self):
         #This method is used to get FUID to automate FUID
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -871,6 +1024,7 @@ class bubblegum:
         return SplitReplacedWhitespacetext
 
     def Deleteleaveuser(self,id):
+        app.logger.info("in func:"+id)
         IsDeleted=True
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         curr=conn.cursor()
@@ -881,7 +1035,7 @@ class bubblegum:
             if not FuidList:
                 app.logger.info("No user food registered")
             else:
-                Query="""delete from fuid_user_ign where userid=%s"""
+                Query="""delete from fuid_user_ign where userid=%s """
                 curr.execute(Query,(id,))
         except psycopg2.Error as e:
             IsDeleted=False
@@ -902,28 +1056,39 @@ def callback():
     body = request.get_data(as_text=True)
     body2 = request.get_json()
     app.logger.info("Request body: " + body) #It shows request body enable debug= true at start of the program. Enabled by default
-    try:   
-        Bubblegum.GROUP_ID=str(body2['events'][0]['source']['groupId'])
-    except KeyError:
-        app.logger.info("KEYERROR groupid")
-    try:
-        Bubblegum.USER_ID=str(body2['events'][0]['source']['userId'])
-    except KeyError:
-        NouserID=False
-        MsgText=str(body2['events'][0]['message']['text'])
-        for text in Bubblegum.commands:
-            if(text in MsgText):
-                Bubblegum.InformBotFix(str(body2['events'][0]['replyToken']))
-                break
-        #app.logger.info("Keyerror userid")
+
     if(str(body2['events'][0]['type'])=="memberLeft"):
         #To manage LeaveEvent
         '''for some reason the LeaveEvent present in line message api doesnt return 
             userid after user leaves the group So don't use the leaveevent. If 
             you want to do operations on certain user ,add your code below.
         '''
-        source=str(body2['events'][0]['left']['members'][0]['userId'])
-        bubblegum.Deleteleaveuser(source)
+        leavingUserID=str(body2['events'][0]['left']['members'][0]['userId'])
+        Bubblegum.Deleteleaveuser(leavingUserID)
+    elif(str(body2['events'][0]['type'])=="memberJoined"):
+        #if player joins the group greet him with this.
+        app.logger.info("New Member Joined")
+        ReplyToken=body2['events'][0]['replyToken']
+        NewUserMessage="Thank you for joining AA . I am bot for BubbleGum . I track food buffs and provide additional help . Check my commands using !help"
+        line_bot_api.reply_message(ReplyToken,TextSendMessage(text=NewUserMessage)
+                    )
+        
+    else:
+        try:   
+            Bubblegum.GROUP_ID=str(body2['events'][0]['source']['groupId'])
+        except KeyError:
+            app.logger.info("KEYERROR groupid")
+            #use is messaging the bot rather than typing message.
+        try:
+            Bubblegum.USER_ID=str(body2['events'][0]['source']['userId'])
+        except KeyError:
+            NouserID=False
+            MsgText=str(body2['events'][0]['message']['text'])
+            for text in Bubblegum.commands:
+                if(text in MsgText):
+                    Bubblegum.InformBotFix(str(body2['events'][0]['replyToken']))
+                    break
+        #app.logger.info("Keyerror userid")
         #app.logger.info("!done")
     #Get the group id for verification
     # #app.logger.info(body2['events'][0]['source']['groupId'])
@@ -952,11 +1117,17 @@ def handle_message(event):
                     content+=str(items)
                 content+="\n"+Bubblegum.commandfoodname
                 line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-                for items in Bubblegum.commands2:
+                #admin content below
+                '''for items in Bubblegum.commands2:
                     admincontent+=str(items)
-                line_bot_api.push_message(Bubblegum.GROUP_ID,TextSendMessage(text=admincontent),)
+                line_bot_api.push_message(Bubblegum.GROUP_ID,TextSendMessage(text=admincontent),)'''
             Bubblegum.CURRENT_ERRORS.clear()
-        elif "!lvling" in msg:
+        elif "!lvlyt" in msg:
+            content=Bubblegum.PopularLevellingManager(msg)
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+            Bubblegum.CURRENT_ERRORS.clear()
+
+        elif "!lvl" in msg:
             stringvalue=Bubblegum.GetLevelValue(msg)
             if(stringvalue!="ERROR_LEVELLING_DATA"):
                 content=Bubblegum.CorynDataColletor_level(int(stringvalue))
@@ -977,6 +1148,10 @@ def handle_message(event):
                     event.reply_token,TextSendMessage(text=content)
                 )
             Bubblegum.CURRENT_ERRORS.clear()
+        elif "!mats" in msg:
+            content=Bubblegum.MaterialQueryManager(msg)
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+            Bubblegum.CURRENT_ERRORS.clear()
         elif "!statting" or "!refining" in msg:
             content=Bubblegum.GuideQueryManager(msg)
             if content!="ERROR_INVALID_QUERY_GUIDE":
@@ -984,9 +1159,8 @@ def handle_message(event):
                     event.reply_token,TextSendMessage(text=content)
                 )
             Bubblegum.CURRENT_ERRORS.clear()
+        
     
-
-
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
