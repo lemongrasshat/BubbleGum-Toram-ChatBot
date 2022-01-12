@@ -1,6 +1,8 @@
 BUBBLEGUM
 =========
 Toram info bot by SNAW/LEMONGRASSHAT
+
+NEW FEATURES ARE COMING SOON
 ---------
 
 ___
