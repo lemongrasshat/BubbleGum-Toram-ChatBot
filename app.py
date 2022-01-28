@@ -49,9 +49,8 @@ APPROVED_ADMIN_ID=["ENTER YOUR ADMIN IDS HERE"] # These are admin userId
 #
 # To add new feature of levelling 
 # for recommendaed and add materials searching command
-# New Levelling command(IMPLEMENTED): !lvlyt have to add limits
+# New Levelling command(not implemented): !lvling2 [current] [achieved] have to add limits
 # Material search command : !mats materailsname/shortform(m/w/med/b)
-# Now better handling so all errors are desplaywed at once;
 # █▓▒░░EDIT ABOVE░░▒▓█
 
 
