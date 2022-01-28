@@ -2,7 +2,7 @@ BUBBLEGUM
 =========
 Toram info bot by SNAW/LEMONGRASSHAT
 
-NEW FEATURES ARE COMING SOON
+New Features : !lvlyt !mats (database will be updated later)
 ---------
 
 ___
