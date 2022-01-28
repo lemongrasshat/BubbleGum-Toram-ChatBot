@@ -112,7 +112,7 @@ ___
   
 ___
 
-18. Now download [this](https://drive.google.com/file/d/1o26MkfPiKKxWmAai_JCxpmIzjO4hewlV/view?usp=sharing) file. It contains the SQL schema for postgres database.
+18. Now download [this](https://drive.google.com/file/d/1o26MkfPiKKxWmAai_JCxpmIzjO4hewlV/view?usp=sharing) (lvlyt and mats won't work, I am working on updating new schema ) file. It contains the SQL schema for postgres database.
   
 ___
 19. Now right click on your **database name > Restore**
@@ -202,7 +202,7 @@ ___
 ![request body](https://imgur.com/NO7KLV9.png) , take a better [look](https://imgur.com/NO7KLV9.png).
   
 ___
-33. Copy userID field and groupID into our app.py program such as:
+33. Copy userID field and groupID into our app.py (if not opened open it in any text application) program such as:
 * APPROVED_GROUP_ID is replaced by groupID from powershell
 * APPROVED_ADMIN_ID is replaced by from powershell.
 * Final [app.py](https://imgur.com/m8CsBdY)
