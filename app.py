@@ -56,8 +56,6 @@ APPROVED_ADMIN_ID=["ENTER YOUR ADMIN IDS HERE"] # These are admin userId
 
 app = Flask(__name__)
 app.debug=True #for debugging purposes
-app = Flask(__name__)
-app.debug=True #for debugging purposes
 
 class bubblegum:
     def __init__(self) -> None:
