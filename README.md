@@ -11,22 +11,22 @@ Commands :https://github.com/lemongrasshat/BubbleGum-Toram-ChatBot/wiki/Commands
 ___
 Features:
 ---------
-* Decent help menu (I guess)
-* Food Buff tracker which allows user to add , edit their own foods and auto removal if they leave that group
+* Help Menu
+* Food Buff tracker which allows user to add , edit their own foods and auto removal if they leave that group.
 * Monster Levelling search which uses coryn.club as references
+* Curated Levelling Info using new command !lvlyt command.
+* Curated Material Farming search using !mats command.
 * Guides related to Refining and Statting in toram.
 * Admin system to allow more than one food buff(Toram allows 2 for now ) this is to make sure user can't add more than allowed.
-
 
 Current Bugs:
 ------------
 These are the only ones that I have encountered but there might be more.Just Raise an issue on github.
 * There is bug(feature?) where a Line user might not have his userID I have prevented them from using any command
-and I have also added simple message to inform fixing steps. You just have to add bot as your friend and message it something to get
-a popup and allow it and then bot will work fine.
+and I have added method so bot will reply with simple message to inform fixing steps for this problem.
 * Don't use LeaveEvent to do operations on user leaving the line group because for some reason LeaveEvent doesn't provide userID. I have provided
 other method in app.route which you can change it to your preference for user leaving.
-* Sometimes you might see some name errors or keyerrors but don't worry it's just because I haven't handled all exceptions(yet!).
+* Sometimes you might see some name errors or keyerrors in output but don't worry it's just because I haven't handled all exceptions(yet!).
 
 Setting up the bot: 
 =========== 
