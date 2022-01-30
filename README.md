@@ -2,7 +2,7 @@ BUBBLEGUM
 =========
 Toram info bot by SNAW/LEMONGRASSHAT
 
-New Features : !lvlyt !mats (database will be updated later)
+New Features : !lvlyt !mats
 ---------
 
 ___
@@ -294,9 +294,17 @@ ___
     Description : Shows resources related to statting.    
     Usage: !statting 
     ___
-    > * **!lvling [level]**  
+    > * **!lvl [level]**  
     Description : Searches for bosses to level up from coryn.club  
-    Usage: !lvling 200
+    Usage: !lvl 200
+    ___ 
+    > * **!lvlyt [level]**  
+    Description : Searches for bosses to level up from popular curated spots.
+    Usage: !lvlyt 200
+    ___
+    > * **!mats [material_name]**  
+    Description : Shows Farming spots for materials: mana(m),medicine(med),cloth(c),beast(b),metal(met),wood(w)".
+    Usage(both short and long form works!): !mats mana or !mats m" .
     ___ 
 ___
 
