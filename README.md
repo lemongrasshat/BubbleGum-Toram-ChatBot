@@ -5,8 +5,9 @@ Toram info bot by SNAW/LEMONGRASSHAT
 New Features : !lvlyt !mats
 ---------
 
+
 ___
-Documentation: https://github.com/lemongrasshat/ToramBot/wiki  
+Commands :https://github.com/lemongrasshat/BubbleGum-Toram-ChatBot/wiki/Commands 
 Releases: https://github.com/lemongrasshat/ToramBot/releases
 ___
 Features:
