@@ -112,7 +112,7 @@ ___
   
 ___
 
-18. Now download [BubbleGumSchemaWithData.tar](https://drive.google.com/drive/folders/1sgwomSDRlJKwsEKFfIHQmWmNcgG2QcBg?usp=sharing) (This removes hassle of adding data ) file. It contains the SQL schema for postgres database. *You can follow databse restore video from same google drive or ![this](https://drive.google.com/file/d/18vfiKk-CXP6h8_0wFU8aYcrbN9XoQ-0G/view?usp=sharing) to skip 19,20,21 step. and start from 22 step*
+18. Now download [BubbleGumSchemaWithData.tar](https://drive.google.com/drive/folders/1sgwomSDRlJKwsEKFfIHQmWmNcgG2QcBg?usp=sharing) (This removes hassle of adding data ) file. It contains the SQL schema for postgres database. *You can follow databse restore video from same google drive or https://drive.google.com/file/d/18vfiKk-CXP6h8_0wFU8aYcrbN9XoQ-0G/view?usp=sharing to skip 19,20,21 step. and start from 22 step*
   
 ___
 19. Now right click on your **database name > Restore**
