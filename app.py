@@ -1,7 +1,7 @@
 
 '''
 
-█▓▒░░BUBBLEGUM░░▒▓█ not tm.
+█▓▒░░BUBBLEGUM░░▒▓█ 
 
 This is Toram Info bot made by SNAW.
 
